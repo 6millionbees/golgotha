@@ -24,5 +24,9 @@ public:
 	
 	static Shader GetShader(std::string name);
 	
-
+    static Texture2D LoadTexture(
+        
+    );
+    
+    static Texture2D GetTexture(std::string name);
 }
