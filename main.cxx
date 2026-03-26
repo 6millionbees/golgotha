@@ -17,12 +17,22 @@
 #include <iostream>
 
 // My Stuff :)
-#include "shader.h"
-#include "resource_manager.h"
+#include "myGL/shader.h"
+#include "myGL/resource_manager.h"
 
 
 int main()
 {
-	// Initialization
+    // Initialization
     glfwInit();
+    glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 4);
+    glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 6);
+    glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
+
+#ifdef __APPLE__
+    // For MacOS
+    glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);
+#endif
+    
+    
 }
