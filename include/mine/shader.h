@@ -12,7 +12,9 @@ class Shader
 public:
 	unsigned int ID;
 	
-	Shader() { }
+	Shader() {}
+	
+	void Compile(const char *vertexSource, const char *fragmentSource, const char geometrySource = nullptr);
 		// 1. Get the source code from the path
 		std::string vertexCode;
 		std::string fragmentCode;
@@ -44,46 +46,7 @@ public:
 		const char* fShaderCode = fragmentCode.c_str();
 		
 		// 2. Compile
-		unsigned int vertex, fragment;
-		int success;
-		char infoLog[512];
 		
-		vertex = glCreateShader(GL_VERTEX_SHADER);
-		// Assign the shader defined at the start of the file to the object above
-		glShaderSource(vertex, 1, &vShaderCode, 0);
-		glCompileShader(vertex);
-		glGetShaderiv(vertex, GL_COMPILE_STATUS, &success);
-		if(!success)
-		{
-			glGetShaderInfoLog(vertex, 512, NULL, infoLog);
-			std::cout << "ERROR::SHADER::VERTEX::COMPILATION_FAILED\n" << infoLog << std::endl;
-		};
-		
-		fragment = glCreateShader(GL_FRAGMENT_SHADER);
-		// Assign the shader defined at the start of the file to the object above
-		glShaderSource(fragment, 1, &fShaderCode, 0);
-		glCompileShader(fragment);
-		glGetShaderiv(fragment, GL_COMPILE_STATUS, &success);
-		if(!success)
-		{
-			glGetShaderInfoLog(fragment, 512, NULL, infoLog);
-			std::cout << "ERROR::SHADER::FRAGMENT::COMPILATION_FAILED\n" << infoLog << std::endl;
-		};
-		
-		// Make the progrm
-		ID = glCreateProgram();
-		glAttachShader(ID, vertex);
-		glAttachShader(ID, fragment);
-		glLinkProgram(ID);
-		// Print linking errors
-		glGetProgramiv(ID, GL_LINK_STATUS, &success);
-		if(!success)
-		{
-			glGetProgramInfoLog(ID, 512, NULL, infoLog);
-			std::cout << "ERROR::SHADER::PROGRAM::LINKING_FAILED\n" << infoLog << std::endl;
-		}
-		glDeleteShader(vertex);
-		glDeleteShader(fragment);
 	
 	Shader &use() {}
 	
@@ -103,6 +66,9 @@ public:
 	{
 		glUniformMatrix4fv(glGetUniformLocation(ID, name.c_str()), 1, GL_FALSE, glm::value_ptr(value));
 	}
+	
+	void checkErrors(unsigned int object, std::string type);
+	
 };
 
 #endif
