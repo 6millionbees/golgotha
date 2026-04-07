@@ -17,7 +17,7 @@ public:
 	void Compile(const char *vertexSource, const char *fragmentSource, const char geometrySource = nullptr);
 
     void checkErrors(unsigned int object, std::string type);
-    
+		
     Shader &Use();
     
     void setBool(const std::string &name, bool value) const
