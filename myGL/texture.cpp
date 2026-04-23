@@ -5,15 +5,8 @@
 
 #include "texture.h"
 
-Texture2D::Texture2D():
-    Width(0),
-    Height(0),
-    Internal_Format(GL_RGB),
-    Image_Format(GL_RGB),
-    Wrap_S(GL_REPEAT),
-    Wrap_T(GL_REPEAT),
-    Filter_Min(GL_LINEAR),
-    Filter_Max(GL_LINEAR)
+Texture2D::Texture2D()
+    : Width(0), Height(0), Internal_Format(GL_RGB), Image_Format(GL_RGB), Wrap_S(GL_REPEAT), Wrap_T(GL_REPEAT), Filter_Min(GL_LINEAR), Filter_Max(GL_LINEAR)
 {
     // I have the ideas of a plan
     glGenTextures(1, &this->ID);
@@ -39,3 +32,5 @@ void Texture2D::Bind() const
 {
     glBindTexture(GL_TEXTURE_2D, this->ID);
 }
+// A different fag wrote this part:
+//hfhfhfhfhfhfhfhfhfhfhfhfhfhf

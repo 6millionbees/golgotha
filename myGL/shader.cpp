@@ -1,13 +1,5 @@
-#include "shader_s.h"
+#include "shader.h"
 
-#include <glad/glad.h>
-#include <glm/glm.hpp>
-#include <glm/gtc/matrix_transform.hpp>
-#include <glm/gtc/type_ptr.hpp>
-
-#include <string>
-#include <fstream>
-#include <sstream>
 #include <iostream>
 
 // Use
@@ -18,11 +10,9 @@ Shader &Shader::Use()
 }
 
 // Compile
-Shader::Compile(const char *vertexSource, const char *fragmentSource, const char *geometrySource = nullptr)
+void Shader::Compile(const char *vertexSource, const char *fragmentSource, const char *geometrySource)
 {
 	unsigned int vShader, fShader, gShader;
-	int success;
-	char infoLog[512];
 	
 	// Vertex
 	vShader = glCreateShader(GL_VERTEX_SHADER);
@@ -87,13 +77,4 @@ void Shader::checkErrors(unsigned int object, std::string type)
                 << std::endl;
         }
     }
-}
-
-
-// Uniform Handlers
-Shader::SetFloat(const char *name, float value, bool useShader)
-{
-    if (useShader)
-        this->Use();
-    glUniform(glUniformGetLocation(this->ID, name), value);
 }

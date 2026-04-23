@@ -9,6 +9,7 @@
 
 // Math <3
 #include <glm/glm.hpp>
+																																														
 #include <glm/gtc/matrix_transform.hpp>
 #include <glm/gtc/type_ptr.hpp>
 #include <cmath>
@@ -17,8 +18,7 @@
 #include <iostream>
 
 // My Stuff :)
-#include "myGL/shader.hpp"
-#include "myGL/resource_manager.hpp"
+#include "myGL/resourceManager.h"
 
 void framebuffer_size_callback(GLFWwindow* window, int width, int height);
 void processInput(GLFWwindow *window);
@@ -62,6 +62,73 @@ int main(int argc, char **argv)
 	// Set viewport to window size
 	glViewport(0, 0, WIND_WIDTH, WIND_HEIGHT);
 
+	float vertices[] = {
+		 0.5f,  0.5f, 0.0f,
+		 0.5f, -0.5f, 0.0f,
+		-0.5f, -0.5f, 0.0f,
+		-0.5f,  0.5f, 0.0f
+	};
+
+	int indices[] = {
+		0, 1, 2,
+		0, 2, 3
+	};
 	
+	Shader baseShader = ResourceManager::LoadShader("shaders/vertex.glsl", "shaders/fragment.glsl", nullptr, "base");
+	
+	// OoooooOOooOoooOooo
+	// Buffers and Array
+	unsigned int VAO, VBO, EBO;
+	glGenVertexArrays(1, &VAO);
+	glBindVertexArray(VAO);
+	
+	glGenBuffers(1, &VBO);
+	glBindBuffer(GL_ARRAY_BUFFER, VBO);
+	glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
+	
+	glGenBuffers(1, &EBO);
+	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBO);
+	glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(indices), indices, GL_STATIC_DRAW);
+	
+	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (void*)0);
+	glEnableVertexAttribArray(0);
+	
+	glBindBuffer(GL_ARRAY_BUFFER, 0);
+
+	glBindVertexArray(0);
+	
+	
+	glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
+	
+	while(!glfwWindowShouldClose(window))
+	{
+		processInput(window);
+		
+		glClear(GL_COLOR_BUFFER_BIT);
+		
+		baseShader.Use();
+		
+		glBindVertexArray(VAO);
+		glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
+		glBindVertexArray(0);
+		
+		glfwSwapBuffers(window);
+		glfwPollEvents();
+	}
+	
+}
+
+void processInput(GLFWwindow *window)
+{
+	if (glfwGetKey(window, GLFW_KEY_ESCAPE) == GLFW_PRESS)
+        glfwSetWindowShouldClose(window, true);
+}
+
+
+
+void framebuffer_size_callback(GLFWwindow* window, int width, int height)
+{
+	glViewport(0, 0, width, height);
+	//~ std::cout << width << ", " << height << std::endl;
 }
 
