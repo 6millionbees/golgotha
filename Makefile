@@ -1,4 +1,4 @@
 main: main.cxx
-	g++ -Wall main.cxx myGL/*.cpp -I include lib/libglfw3.a glad.o -o main
+	g++ -Wall src/main.cxx src/myGL/*.cpp -I include lib/libglfw3.a include/glad.o -o main
 
 # hehehe
