@@ -1,0 +1,32 @@
+Game states
+
+Here are a bunch of hipothetical game states and how they would be nested:
+
+Main Menu()
+{
+	New Game && Load Game(They both lead to the same place they just might take a while)
+	{
+		Game()
+		{
+			Combat()
+			{
+				Inventory()
+				{
+					Item Descriptions
+				{
+			}
+			Dialogue() // could lead to combat but wouldn't nest because it would be Dialouge->Combat
+			Exploring()
+			{
+				Inventory()
+				{
+					Item Descriptions()
+					Shops()
+					{
+						Item Descriptions
+					}
+				}
+			}
+		}
+	}
+}
