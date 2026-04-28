@@ -28,16 +28,17 @@ long_line_behaviour=1
 long_line_column=72
 
 [files]
-current_page=7
-FILE_NAME_0=69;C++;0;EUTF-8;1;1;0;%2Fhome%2Fmillionbees%2FDocuments%2Fcode%2Fcpp%2Fgolgotha%2Fmain.cxx;0;4
+current_page=0
+FILE_NAME_0=994;C++;0;EUTF-8;1;1;0;%2Fhome%2Fmillionbees%2FDocuments%2Fcode%2Fcpp%2Fgolgotha%2Fmain.cxx;0;4
 FILE_NAME_1=71;C++;0;EUTF-8;1;1;0;%2Fhome%2Fmillionbees%2FDocuments%2Fcode%2Fcpp%2Fgolgotha%2FmyGL%2Ftexture.cpp;0;4
 FILE_NAME_2=0;C++;0;EUTF-8;1;1;0;%2Fhome%2Fmillionbees%2FDocuments%2Fcode%2Fcpp%2Fgolgotha%2FmyGL%2Ftexture.h;0;4
 FILE_NAME_3=272;C++;0;EUTF-8;1;1;0;%2Fhome%2Fmillionbees%2FDocuments%2Fcode%2Fcpp%2Fgolgotha%2FmyGL%2Fshader.cpp;0;4
 FILE_NAME_4=377;C++;0;EUTF-8;1;1;0;%2Fhome%2Fmillionbees%2FDocuments%2Fcode%2Fcpp%2Fgolgotha%2FmyGL%2Fshader.h;0;4
 FILE_NAME_5=0;C++;0;EUTF-8;1;1;0;%2Fhome%2Fmillionbees%2FDocuments%2Fcode%2Fcpp%2Fgolgotha%2Finclude%2Fglad%2Fglad.h;0;4
 FILE_NAME_6=0;C;0;EUTF-8;1;1;0;%2Fhome%2Fmillionbees%2FDocuments%2Fcode%2Fcpp%2Fgolgotha%2Fglad.c;0;4
-FILE_NAME_7=852;C++;0;EUTF-8;1;1;0;%2Fhome%2Fmillionbees%2FDocuments%2Fcode%2Fcpp%2Fgolgotha%2FmyGL%2FresourceManager.cpp;0;4
+FILE_NAME_7=1029;C++;0;EUTF-8;1;1;0;%2Fhome%2Fmillionbees%2FDocuments%2Fcode%2Fcpp%2Fgolgotha%2FmyGL%2FresourceManager.cpp;0;4
 FILE_NAME_8=874;C++;0;EUTF-8;1;1;0;%2Fhome%2Fmillionbees%2FDocuments%2Fcode%2Fcpp%2Fgolgotha%2FmyGL%2FresourceManager.h;0;4
+FILE_NAME_9=96;Make;0;EUTF-8;1;1;0;%2Fhome%2Fmillionbees%2FDocuments%2Fcode%2Fcpp%2Fgolgotha%2FMakefile;0;4
 
 [VTE]
 last_dir=/home/millionbees

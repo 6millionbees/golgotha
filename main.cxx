@@ -40,7 +40,7 @@ int main(int argc, char **argv)
 #endif
     
     GLFWwindow* window = glfwCreateWindow(
-		WIND_WIDTH, WIND_HEIGHT, "Golgotha 0.0.1", 0, 0);
+		WIND_WIDTH, WIND_HEIGHT, "Golgotha 0.0.0", 0, 0);
 	if (!window)
 	{
 		std::cout << "Failed to create window" << std::endl;
@@ -98,7 +98,7 @@ int main(int argc, char **argv)
 	glBindVertexArray(0);
 	
 	
-	glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
+	glClearColor(1.0f, 0.0f, 0.0f, 1.0f);
 	
 	while(!glfwWindowShouldClose(window))
 	{
