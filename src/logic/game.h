@@ -14,11 +14,16 @@
 class Game
 {
 public:
+
+
+    Game() {};
+
+    void Update();
     
-    
+    void Draw();
     
 private:
     
-}
+};
 
 #endif /* game_hpp */

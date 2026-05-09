@@ -1,6 +1,6 @@
 // Arden Boettcher
 // Started: 3/23/26
-// Version: 0.0.1
+// Version: 0.0.0
 // Golgotha
 
 // OpenGL loaders
@@ -9,7 +9,6 @@
 
 // Math <3
 #include <glm/glm.hpp>
-																																														
 #include <glm/gtc/matrix_transform.hpp>
 #include <glm/gtc/type_ptr.hpp>
 #include <cmath>
@@ -19,12 +18,16 @@
 
 // My Stuff :)
 #include "myGL/resourceManager.h"
+#include "myGL/spriteRenderer.h"
+#include "logic/game.h"
 
 void framebuffer_size_callback(GLFWwindow* window, int width, int height);
 void processInput(GLFWwindow *window);
 
-const int WIND_WIDTH  = 720;
-const int WIND_HEIGHT = 576;
+SpriteRenderer *Renderer;
+
+const int WIND_WIDTH  = 250;
+const int WIND_HEIGHT = 250;
 
 int main(int argc, char **argv)
 {
@@ -33,6 +36,8 @@ int main(int argc, char **argv)
     glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 4);
     glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 6);
     glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
+
+	glfwWindowHint(GLFW_RESIZABLE, GLFW_FALSE);
 
 #ifdef __APPLE__
     // For MacOS
@@ -62,55 +67,24 @@ int main(int argc, char **argv)
 	// Set viewport to window size
 	glViewport(0, 0, WIND_WIDTH, WIND_HEIGHT);
 
-	float vertices[] = {
-		 0.5f,  0.5f, 0.0f,
-		 0.5f, -0.5f, 0.0f,
-		-0.5f, -0.5f, 0.0f,
-		-0.5f,  0.5f, 0.0f
-	};
+	Shader spriteProgram = ResourceManager::LoadShader("shaders/spriteVertex.glsl", "shaders/spriteFragment.glsl", nullptr, "spriteProgram");
 
-	int indices[] = {
-		0, 1, 2,
-		0, 2, 3
-	};
-	
-	Shader baseShader = ResourceManager::LoadShader("shaders/vertex.glsl", "shaders/fragment.glsl", nullptr, "base");
-	
-	// OoooooOOooOoooOooo
-	// Buffers and Array
-	unsigned int VAO, VBO, EBO;
-	glGenVertexArrays(1, &VAO);
-	glBindVertexArray(VAO);
-	
-	glGenBuffers(1, &VBO);
-	glBindBuffer(GL_ARRAY_BUFFER, VBO);
-	glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
-	
-	glGenBuffers(1, &EBO);
-	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBO);
-	glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(indices), indices, GL_STATIC_DRAW);
-	
-	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (void*)0);
-	glEnableVertexAttribArray(0);
-	
-	glBindBuffer(GL_ARRAY_BUFFER, 0);
+	glm::mat4 projection = glm::ortho(0.0f, WIND_WIDTH*1.0f, WIND_HEIGHT*1.0f, 0.0f, 1.0f, -1.0f);
 
-	glBindVertexArray(0);
-	
-	
-	glClearColor(1.0f, 0.0f, 0.0f, 1.0f);
-	
+	spriteProgram.Use().SetInteger("image", 0);
+	spriteProgram.SetMatrix4("projection", projection, false);
+
+	Renderer = new SpriteRenderer(spriteProgram);
+
+	Texture2D lancaImage = ResourceManager::LoadTexture("images/img.png", true, "lanca");
+
 	while(!glfwWindowShouldClose(window))
 	{
 		processInput(window);
 		
 		glClear(GL_COLOR_BUFFER_BIT);
-		
-		baseShader.Use();
-		
-		glBindVertexArray(VAO);
-		glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
-		glBindVertexArray(0);
+
+		Renderer->DrawSprite(lancaImage, glm::vec2(0.0f), glm::vec2(200.0f), glfwGetTime(), glm::vec3(1.0f));
 		
 		glfwSwapBuffers(window);
 		glfwPollEvents();
@@ -131,4 +105,5 @@ void framebuffer_size_callback(GLFWwindow* window, int width, int height)
 	glViewport(0, 0, width, height);
 	//~ std::cout << width << ", " << height << std::endl;
 }
+
 

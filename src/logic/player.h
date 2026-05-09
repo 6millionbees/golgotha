@@ -14,7 +14,7 @@ class Player
 {
 public:
     
-    Player(save);
-}
+    Player() {};
+};
 
 #endif // PLAYER_H

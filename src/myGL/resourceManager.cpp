@@ -3,6 +3,9 @@
 #include <fstream>
 
 #include "resourceManager.h"
+#define STB_IMAGE_IMPLEMENTATION
+#include "stb_image.h"
+
 
 // I'm actually just going to die
 std::map<std::string, Texture2D>    ResourceManager::Textures;
@@ -24,9 +27,9 @@ Shader ResourceManager::GetShader(std::string name)
 
 // Texture Functions
 // =================================================================
-Texture2D ResourceManager::LoadTexture(const char file, bool alpha, std::string name)
+Texture2D ResourceManager::LoadTexture(const char *file, bool alpha, std::string name)
 {
-	//~ Textures[name] = loadTextureFromFile(file, alpha);
+	Textures[name] = loadTextureFromFile(file, alpha);
 	return Textures[name];
 }
 
@@ -92,8 +95,24 @@ Shader ResourceManager::loadShaderFromFile(const char *vShaderFile, const char *
 }
 
 
-//~ Texture2D ResourceManager::loadTextureFromFile(const char *file, bool alpha)
-//~ {
-    //~ Texture2d texture;
-    //~ return texture;
-//~ }
+Texture2D ResourceManager::loadTextureFromFile(const char *file, bool alpha)
+{
+    Texture2D texture;
+    if (alpha)
+    {
+        texture.Internal_Format = GL_RGBA;
+        texture.Image_Format = GL_RGBA;
+    }
+    // load data with stbi
+    int width, height, nrChannels;
+    unsigned char *data = stbi_load(file, &width, &height, &nrChannels, 0);
+    if (!data)
+    {
+        std::cout << "Error::Failure to load texture: " << file;
+    }
+    // put the texture in the bag
+    texture.Generate(width, height, data);
+    // free the data from it's mortal coil
+    stbi_image_free(data);
+    return texture;
+}

@@ -30,3 +30,5 @@ Main Menu()
 		}
 	}
 }
+
+better version (psudocode):
