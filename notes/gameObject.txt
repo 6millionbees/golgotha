@@ -1,0 +1,12 @@
+GameObject Psudocode
+
+class GameObject
+{
+public:
+    GameObject() {}
+
+    void Draw(); // like fuckinngggg draws shit idk man just like draw that fucking shit mannnnnnnnn
+
+
+
+};
